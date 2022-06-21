@@ -33,10 +33,10 @@ public class Layer {
        }
     }
 
-    public void updateLayer(RenderTarget renderTarget) {
+    public void updateLayer(Game game, RenderTarget renderTarget) {
         for(GameElement element : this.gameElements) {
             if(element.isEnabled()) {
-                element.update(renderTarget);
+                element.update(game, renderTarget);
             }
         }
     }
@@ -82,5 +82,24 @@ public class Layer {
 
     public void setGameElements(Vector<GameElement> gameElements) {
         this.gameElements = gameElements;
+    }
+    
+    public Vector<GameElement> getElementsByTag(String tag) {
+    	Vector<GameElement> outVal = new Vector<>();
+    	for(GameElement e : this.gameElements) {
+    		if(e.getTag().equals(tag)) {
+    			outVal.add(e);
+    		}
+    	}
+    	return outVal;
+    }
+    
+    public GameElement getElement(String name) {
+    	for(var e : this.gameElements) {
+    		if(e.getName().equals(name)) {
+    			return e;
+    		}
+    	}
+    	return null;
     }
 }

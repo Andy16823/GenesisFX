@@ -7,12 +7,14 @@ import javafx.scene.image.Image;
 
 import java.util.Vector;
 
+import gfx.graphics.Camera;
 import gfx.math.Vector2;
 
 public class gfxScene extends javafx.scene.Scene{
 	private String name;
     private String tag;
     private Vector<Layer> layer;
+    private Camera camera;
     private Vector2 transform;
     private Image backgroundPlane;
     private Input input;
@@ -54,10 +56,10 @@ public class gfxScene extends javafx.scene.Scene{
         }
     }
 
-    public void updateScene(RenderTarget renderTarget) {
+    public void updateScene(Game game, RenderTarget renderTarget) {
         for(Layer layer1 : this.layer) {
             if(layer1.isEnabled()) {
-                layer1.updateLayer(renderTarget);
+                layer1.updateLayer(game, renderTarget);
             }
         }
     }
@@ -95,11 +97,13 @@ public class gfxScene extends javafx.scene.Scene{
     	return null;
     }
     
-    public void addGameElment(String layername, GameElement element) {
+    public GameElement addGameElment(String layername, GameElement element) {
     	Layer layerToInsert = this.getLayer(layername);
     	if(layerToInsert != null) {
     		layerToInsert.addGameElement(element);
+    		return element;
     	}
+    	return null;
     }
     
     public void transformScene(double x, double y)
@@ -190,6 +194,44 @@ public class gfxScene extends javafx.scene.Scene{
 	
 	public void addCanvas(Canvas canvas) {
 		this.getParent().getChildren().add(canvas);
+	}
+
+	public Camera getGfxCamera() {
+		return camera;
+	}
+
+	public void setCamera(Camera camera) {
+		this.camera = camera;
+		this.camera.setScene(this);
+	}
+	
+	public Camera createCamera(double width, double height) {
+		this.camera = new Camera(0,0,width, height);
+		this.camera.setScene(this);
+		return camera;
+	}
+	
+	public GameElement getElement(int layer, String name) {
+		return this.layer.get(layer).getElement(name);
+	}
+	
+	public GameElement getElement(String layer, String name) {
+		return this.getLayer(layer).getElement(name);
+	}
+	
+	public GameElement getElement(String element) {
+		String[] query = element.split(".");
+		return this.getElement(query[0], query[1]);
+	}
+	
+	public boolean removeElement(GameElement element) {
+		for(var layer : this.layer) {
+			if(layer.getGameElements().contains(element)) {
+				layer.getGameElements().remove(element);
+				return true;
+			}
+		}
+		return false;
 	}
 		
 }

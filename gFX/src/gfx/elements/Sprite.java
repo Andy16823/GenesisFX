@@ -1,5 +1,6 @@
 package gfx.elements;
 
+import gfx.Game;
 import gfx.GameBehavior;
 import gfx.RenderTarget;
 import gfx.math.Vector2;
@@ -16,6 +17,13 @@ public class Sprite extends gfx.GameElement {
 		this.setSize(size);
 		this.sprite = sprite;
 	}
+	
+	public Sprite(String name, Vector2 location, Image sprite) {
+		this.setName(name);
+		this.setLocation(location);
+		this.setSize(new Vector2(sprite.getWidth(), sprite.getHeight()));
+		this.sprite = sprite;
+	}	
 	
 	@Override
 	public void render(GraphicsContext g) {
@@ -36,7 +44,7 @@ public class Sprite extends gfx.GameElement {
 	}
 
 	@Override
-	public void update(RenderTarget target) {
+	public void update(Game game,RenderTarget target) {
 		// TODO Auto-generated method stub
 		for(GameBehavior behavior : this.getBehaviors()) {
 			behavior.onUpdate(target);
@@ -59,6 +67,12 @@ public class Sprite extends gfx.GameElement {
 			return true;
 		}
 		return false;
+	}
+	
+	public void calculateFromHeight(double height) {
+		double newWidth = (this.getSize().getX() / this.getSize().getY() * height);
+		this.getSize().setX(newWidth);
+		this.getSize().setY(height);
 	}
 	
 }

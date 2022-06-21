@@ -1,5 +1,6 @@
 package gfx.elements;
 
+import gfx.Game;
 import gfx.GameElement;
 import gfx.RenderTarget;
 import gfx.math.Vector2;
@@ -49,7 +50,7 @@ public class Rectangle extends GameElement {
 	}
 
 	@Override
-	public void update(RenderTarget target) {
+	public void update(Game game,RenderTarget target) {
 		// TODO Auto-generated method stub
 
 	}

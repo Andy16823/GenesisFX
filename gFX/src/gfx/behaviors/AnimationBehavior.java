@@ -18,6 +18,7 @@ public class AnimationBehavior extends GameBehavior {
 	private int currentFrame;
 	private long lastFrame;
 	private long frameTime;
+	private int playCount = 0;
 	
 	public AnimationBehavior(long frameTime) {
 		this.animations = new Vector<>();
@@ -61,13 +62,15 @@ public class AnimationBehavior extends GameBehavior {
 		long now = System.currentTimeMillis();
 		if(now > this.lastFrame + frameTime) {
 			if(this.currentAnimation != null) {
-				TextureAtlas tileSet = this.currentAnimation.getAnimationSheet();
+				//TextureAtlas tileSet = this.currentAnimation.getAnimationSheet();
 				this.currentFrame++;
 				if(this.currentFrame > this.currentAnimation.getFrames()) {
 					this.currentFrame = 0;
+					this.playCount++;
 				}
 				this.lastFrame = now;
-				Image nextImg = tileSet.getTile(this.currentAnimation.getStartX() + currentFrame, this.currentAnimation.getStartY());
+				Image nextImg = this.currentAnimation.getFrame(currentFrame);
+				//Image nextImg = tileSet.getTile(this.currentAnimation.getStartX() + currentFrame, this.currentAnimation.getStartY());
 				return nextImg;
 			}			
 		}
@@ -82,6 +85,14 @@ public class AnimationBehavior extends GameBehavior {
 		}
 	}
 	
+	public void playAnimation(Animation animation) {
+		if(this.currentAnimation != animation) {
+			this.currentAnimation = animation;	
+			this.currentFrame = 0;
+			this.lastFrame = System.currentTimeMillis();
+		}
+	}
+	
 	public Animation getAnimation(String name) {
 		for(Animation animation : this.animations) {
 			if(animation.getName().equals(name)) {
@@ -89,6 +100,54 @@ public class AnimationBehavior extends GameBehavior {
 			}
 		}
 		return null;
+	}
+
+	public Vector<Animation> getAnimations() {
+		return animations;
+	}
+
+	public void setAnimations(Vector<Animation> animations) {
+		this.animations = animations;
+	}
+
+	public Animation getCurrentAnimation() {
+		return currentAnimation;
+	}
+
+	public void setCurrentAnimation(Animation currentAnimation) {
+		this.currentAnimation = currentAnimation;
+	}
+
+	public int getCurrentFrame() {
+		return currentFrame;
+	}
+
+	public void setCurrentFrame(int currentFrame) {
+		this.currentFrame = currentFrame;
+	}
+
+	public long getLastFrame() {
+		return lastFrame;
+	}
+
+	public void setLastFrame(long lastFrame) {
+		this.lastFrame = lastFrame;
+	}
+
+	public long getFrameTime() {
+		return frameTime;
+	}
+
+	public void setFrameTime(long frameTime) {
+		this.frameTime = frameTime;
+	}
+
+	public int getPlayCount() {
+		return playCount;
+	}
+
+	public void setPlayCount(int playCount) {
+		this.playCount = playCount;
 	}
 
 }

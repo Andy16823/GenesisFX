@@ -11,7 +11,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
 public class BoxCollider extends Collider {
-
+	private boolean debugMode = false;
+	
 	public BoxCollider() { 
 	}
 	
@@ -36,10 +37,12 @@ public class BoxCollider extends Collider {
 	@Override
 	public void afterRender(GraphicsContext g) {
 		// TODO Auto-generated method stub
-		Paint oldPaint = g.getStroke();
-		g.setStroke(Color.BLUE);
-		g.strokeRect(this.getParent().getLocation().getX(), this.getParent().getLocation().getY(), this.getParent().getSize().getX(), this.getParent().getSize().getY());
-		g.setStroke(oldPaint);
+		if(this.debugMode) {
+			Paint oldPaint = g.getStroke();
+			g.setStroke(Color.BLUE);
+			g.strokeRect(this.getParent().getLocation().getX(), this.getParent().getLocation().getY(), this.getParent().getSize().getX(), this.getParent().getSize().getY());
+			g.setStroke(oldPaint);
+		}
 	}
 
 	@Override
@@ -57,7 +60,6 @@ public class BoxCollider extends Collider {
 		for(GameElement element : this.getElements()) {
 			Collider elementCollider = (Collider) element.getBehavior2(Collider.class.getSimpleName());
 			if(elementCollider != null) {
-				System.out.println("here");
 				// Top left
 				if(elementCollider.contains(this.getParent().getLocation().getX(), this.getParent().getLocation().getY())) {
 					return true;
@@ -144,6 +146,16 @@ public class BoxCollider extends Collider {
 			}
 		}
 		return null;
+	}
+
+
+	public boolean isDebugMode() {
+		return debugMode;
+	}
+
+
+	public void setDebugMode(boolean debugMode) {
+		this.debugMode = debugMode;
 	}
 	
 }

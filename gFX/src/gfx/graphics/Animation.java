@@ -2,6 +2,7 @@ package gfx.graphics;
 
 import java.util.Vector;
 
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class Animation {
@@ -67,6 +68,18 @@ public class Animation {
 	
 	public Image getFrame(int i) {
 		return this.frameVector.get(i);
+	}
+	
+	public static Image createAnimationSheet(Vector<Image> images, double width, double height) {
+		gfx.graphics.gfxImage image = new gfxImage((int)(images.size() * width), (int) height);
+		GraphicsContext g = image.getGraphicsContex();
+		int i = 0;
+		for(var item : images) {
+			g.drawImage(item, i * width, height, width, height);
+			i++;
+		}
+		image.flush();
+		return image;
 	}
 	
 }

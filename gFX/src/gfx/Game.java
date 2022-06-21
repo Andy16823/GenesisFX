@@ -13,6 +13,7 @@ public class Game {
 	private gfxScene selectedScene;
 	private GameCallbacks callbacks;
 	private RessourceManager assets;
+	private Storage storage;
 	
 	public Game(RenderTarget renderTarget, int maxFps, GameCallbacks callbacks) {
 		this.scenes = new Vector<>();
@@ -22,6 +23,7 @@ public class Game {
 		this.assets = new RessourceManager();
 		this.root = new Group();
 		this.root.getChildren().add(renderTarget);
+		this.storage = new Storage(this);
 		
 	}
 	
@@ -33,6 +35,7 @@ public class Game {
 		this.assets = new RessourceManager();
 		this.root = new Group();
 		this.root.getChildren().add(renderTarget);
+		this.storage = new Storage(this);
 	}
 	
 	public void start() {
@@ -50,7 +53,8 @@ public class Game {
 		if(callbacks != null) {
 			this.callbacks.onUpdate(this);
 		}
-		this.selectedScene.updateScene(renderTarget);
+		this.selectedScene.updateScene(this, renderTarget);
+		this.storage.clearElements();
 	}
 	
 	public void render() {
@@ -126,6 +130,10 @@ public class Game {
 
 	public void setRoot(Group root) {
 		this.root = root;
+	}
+
+	public Storage getStorage() {
+		return storage;
 	}
 	
 }

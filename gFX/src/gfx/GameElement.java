@@ -15,7 +15,7 @@ public abstract class GameElement {
     private double rotation;
 
     public abstract void render(GraphicsContext g);
-    public abstract void update(RenderTarget target);
+    public abstract void update(Game game, RenderTarget target);
     
     public GameElement() {
     	this.behaviors = new Vector<>();
@@ -73,9 +73,10 @@ public abstract class GameElement {
     	return new Vector2(x,y);
     }
     
-    public void addBehavior(GameBehavior behavior) {
+    public GameBehavior addBehavior(GameBehavior behavior) {
     	this.behaviors.add(behavior);
     	behavior.setParent(this);
+    	return behavior;
     }
     
     public GameBehavior getBehavior(String className) {
