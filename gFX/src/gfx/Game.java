@@ -3,8 +3,10 @@ package gfx;
 import java.util.Vector;
 
 import javafx.scene.Group;
+import javafx.stage.Stage;
 
 public class Game {
+	private Stage stage;
 	private Vector<gfxScene> scenes;
 	private Group root;
 	private RenderTarget renderTarget;
@@ -27,7 +29,7 @@ public class Game {
 		
 	}
 	
-	public Game(int width, int height, int maxFps, GameCallbacks callbacks) {
+	public Game(int width, int height, int maxFps, Stage stage, GameCallbacks callbacks) {
 		this.scenes = new Vector<>();
 		this.renderTarget = new gfx.graphics.GraphicsContext2D(width, height);
 		this.timer = new gfx.Timer(maxFps, this);
@@ -36,6 +38,7 @@ public class Game {
 		this.root = new Group();
 		this.root.getChildren().add(renderTarget);
 		this.storage = new Storage(this);
+		this.stage = stage;
 	}
 	
 	public void start() {
@@ -78,6 +81,10 @@ public class Game {
     
     public void loadScene(String name) {
     	this.selectedScene = this.getScene(name);
+    	this.root = this.selectedScene.getParent();
+    	this.root.getChildren().add(renderTarget);
+    	this.selectedScene.recalculate();
+    	this.stage.setScene(selectedScene);
     }
 	
 	public Vector<gfxScene> getScenes() {

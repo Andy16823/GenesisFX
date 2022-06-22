@@ -33,6 +33,18 @@ public class gfxScene extends javafx.scene.Scene{
 		this.parent = parent;
 	}
     
+    public gfxScene(String name) {
+		super(new Group());
+		this.name = name;
+		this.layer = new Vector<>();
+		this.transform = new Vector2(0,0);
+		this.input = new Input();
+		this.resetInput();
+		this.uiNode = new Group();
+		parent.getChildren().add(uiNode);
+		this.parent = (Group) super.getRoot();
+	}
+    
     public void init(Game game) {
     	for(Layer l : this.layer) {
     		l.init(game);
@@ -41,6 +53,11 @@ public class gfxScene extends javafx.scene.Scene{
 
     public void addLayer(Layer layer) {
         this.layer.add(layer);
+    }
+    
+    public void recalculate() {
+    	this.parent.getChildren().remove(uiNode);
+    	this.parent.getChildren().add(uiNode);
     }
 
     public void renderScene(GraphicsContext g) {
