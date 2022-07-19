@@ -47,7 +47,7 @@ public class Sprite extends gfx.GameElement {
 	public void update(Game game,RenderTarget target) {
 		// TODO Auto-generated method stub
 		for(GameBehavior behavior : this.getBehaviors()) {
-			behavior.onUpdate(target);
+			behavior.onUpdate(game);
 		}
 		
 	}
@@ -73,6 +73,10 @@ public class Sprite extends gfx.GameElement {
 		double newWidth = (this.getSize().getX() / this.getSize().getY() * height);
 		this.getSize().setX(newWidth);
 		this.getSize().setY(height);
+	}
+	
+	public double getSpriteResoulution() {
+		return this.getSize().getY() / this.getSize().getX();
 	}
 	
 }

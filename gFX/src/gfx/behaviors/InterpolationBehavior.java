@@ -19,9 +19,8 @@ public class InterpolationBehavior extends GameBehavior{
 	}
 
 	@Override
-	public void onUpdate(RenderTarget renderTarget) {
+	public void onUpdate(Game game) {
 		// TODO Auto-generated method stub
-		System.out.println("here");
 		if(this.elementToFollow != null) {
 			if(this.follow) {
 				this.rotateAt();
@@ -82,6 +81,12 @@ public class InterpolationBehavior extends GameBehavior{
 
 	public void setGame(Game game) {
 		this.game = game;
+	}
+
+	@Override
+	public void onAttach(GameElement element) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

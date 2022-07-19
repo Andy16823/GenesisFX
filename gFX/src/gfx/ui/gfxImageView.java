@@ -15,10 +15,12 @@ public class gfxImageView extends gfxControl{
 	BorderPane layout;
 	Label label;
 	ImageView imageView;
+	String text;
 	
 	
-	public gfxImageView(String name, Vector2 location, Vector2 size, Image image) {
+	public gfxImageView(String name, String text, Vector2 location, Vector2 size, Image image) {
 		super(name);
+		this.text = text;
 		
 		layout = new BorderPane();
 		layout.setLayoutX(location.getX());
@@ -28,7 +30,7 @@ public class gfxImageView extends gfxControl{
 		imageView = new ImageView(image);	
 		layout.setCenter(imageView);
 		
-		label = new Label(name);
+		label = new Label(text);
 		label.setAlignment(Pos.CENTER);
 		label.setPrefWidth(size.getX());
 		layout.setBottom(label);
@@ -65,6 +67,21 @@ public class gfxImageView extends gfxControl{
 
 	public void setImageView(ImageView imageView) {
 		this.imageView = imageView;
+	}
+
+
+	public String getText() {
+		return text;
+	}
+
+
+	public void setText(String text) {
+		this.text = text;
+		this.label.setText(text);
+	}
+	
+	public void setImage(Image image) {
+		this.imageView.setImage(image);
 	}
 	
 }

@@ -2,6 +2,7 @@ package gfx.behaviors;
 
 import gfx.Game;
 import gfx.GameBehavior;
+import gfx.GameElement;
 import gfx.RenderTarget;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -16,7 +17,7 @@ public class BoundingBox extends GameBehavior {
 	}
 
 	@Override
-	public void onUpdate(RenderTarget renderTarget) {
+	public void onUpdate(Game game) {
 		// TODO Auto-generated method stub
 
 	}
@@ -35,5 +36,13 @@ public class BoundingBox extends GameBehavior {
 		// TODO Auto-generated method stub
 
 	}
+
+	@Override
+	public void onAttach(GameElement element) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
 
 }

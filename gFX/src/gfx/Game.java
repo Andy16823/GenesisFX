@@ -16,6 +16,7 @@ public class Game {
 	private GameCallbacks callbacks;
 	private RessourceManager assets;
 	private Storage storage;
+	private boolean pause;
 	
 	public Game(RenderTarget renderTarget, int maxFps, GameCallbacks callbacks) {
 		this.scenes = new Vector<>();
@@ -46,7 +47,9 @@ public class Game {
 		if(callbacks != null) {
 			this.callbacks.beforeStart(this);
 		}
-		this.selectedScene.init(this);
+		for(var scene : this.scenes) {
+			scene.init(this);
+		}
 		long timestamp = System.currentTimeMillis() / 1000;
 		this.timer.setTimestamp(timestamp);
 		this.timer.start();
@@ -142,5 +145,13 @@ public class Game {
 	public Storage getStorage() {
 		return storage;
 	}
-	
+
+	public boolean isPause() {
+		return pause;
+	}
+
+	public void setPause(boolean pause) {
+		this.pause = pause;
+	}
+		
 }

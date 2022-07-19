@@ -64,4 +64,22 @@ public class Rect {
 		return false;
 	}
 	
+	public void addX(double value) {
+		this.x += value;
+	}
+	
+	public void addY(double value) {
+		this.y += value;
+	}
+	
+	public void add(double valueX,double valueY) {
+		this.x += valueX;
+		this.y += valueY;
+	}
+	
+	public Rect duplicate() {
+		return new Rect(x,y,width, height);
+	}
+	
+	
 }

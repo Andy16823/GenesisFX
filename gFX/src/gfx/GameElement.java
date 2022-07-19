@@ -76,6 +76,7 @@ public abstract class GameElement {
     public GameBehavior addBehavior(GameBehavior behavior) {
     	this.behaviors.add(behavior);
     	behavior.setParent(this);
+    	behavior.onAttach(this);
     	return behavior;
     }
     

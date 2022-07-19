@@ -77,6 +77,14 @@ public class Input {
         this.MouseInput = MouseInput;
     }
 
+    public boolean isMouseButtonDown(MouseButton button) {
+    	if(this.mouseButton != null) {
+    		if(this.mouseButton == button) {
+    			return true;
+    		}
+    	}
+    	return false;
+    }
     
     public MouseButton getMouseButton() {
     	MouseButton button = this.mouseButton;

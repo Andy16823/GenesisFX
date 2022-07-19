@@ -6,6 +6,7 @@ import gfx.Game;
 import gfx.GameElement;
 import gfx.RenderTarget;
 import gfx.Toolkit;
+import gfx.math.Rect;
 import gfx.math.Vector2;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -27,6 +28,12 @@ public class Grid extends GameElement {
 		this.cellWidth = cellWidth;
 		this.cellHeight = cellHeight;
 		this.createMatrix();
+	}
+	
+	public Grid(String name, Vector<Rect> matrix) {
+		this.setLocation(Vector2.zero());
+		this.setName(name);
+		this.matrix = matrix;
 	}
 
 	@Override

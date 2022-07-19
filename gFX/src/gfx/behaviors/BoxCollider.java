@@ -6,9 +6,12 @@ import gfx.Game;
 import gfx.GameBehavior;
 import gfx.GameElement;
 import gfx.RenderTarget;
+import gfx.math.Rect;
+import gfx.math.Vector2;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 
 public class BoxCollider extends Collider {
 	private boolean debugMode = false;
@@ -24,7 +27,7 @@ public class BoxCollider extends Collider {
 	}
 
 	@Override
-	public void onUpdate(RenderTarget renderTarget) {
+	public void onUpdate(Game game) {
 		// TODO Auto-generated method stub
 
 	}
@@ -61,23 +64,7 @@ public class BoxCollider extends Collider {
 			Collider elementCollider = (Collider) element.getBehavior2(Collider.class.getSimpleName());
 			if(elementCollider != null) {
 				// Top left
-				if(elementCollider.contains(this.getParent().getLocation().getX(), this.getParent().getLocation().getY())) {
-					return true;
-				}
-				// Top right
-				else if(elementCollider.contains(this.getParent().getLocation().getX() + this.getParent().getSize().getX(), this.getParent().getLocation().getY())) {
-					return true;
-				}
-				// Bottom right
-				else if(elementCollider.contains(this.getParent().getLocation().getX() + this.getParent().getSize().getX(), this.getParent().getLocation().getY() + this.getParent().getSize().getY())) {
-					return true;
-				}
-				// Bottom left
-				else if(elementCollider.contains(this.getParent().getLocation().getX(), this.getParent().getLocation().getY() + this.getParent().getSize().getY())) {
-					return true;
-				}
-				// Center
-				else if(elementCollider.contains(this.getParent().getCenterLocation().getX(), this.getParent().getCenterLocation().getY())) {
+				if(this.isOverlapping(element)) {
 					return true;
 				}
 			}
@@ -108,24 +95,7 @@ public class BoxCollider extends Collider {
 		for(GameElement element : this.getElements()) {
 			Collider elementCollider = (Collider) element.getBehavior2(Collider.class.getSimpleName());
 			if(elementCollider != null) {
-				// Top left
-				if(elementCollider.contains(this.getParent().getLocation().getX(), this.getParent().getLocation().getY())) {
-					return element;
-				}
-				// Top right
-				else if(elementCollider.contains(this.getParent().getLocation().getX() + this.getParent().getSize().getX(), this.getParent().getLocation().getY())) {
-					return element;
-				}
-				// Bottom right
-				else if(elementCollider.contains(this.getParent().getLocation().getX() + this.getParent().getSize().getX(), this.getParent().getLocation().getY() + this.getParent().getSize().getY())) {
-					return element;
-				}
-				// Bottom left
-				else if(elementCollider.contains(this.getParent().getLocation().getX(), this.getParent().getLocation().getY() + this.getParent().getSize().getY())) {
-					return element;
-				}
-				// Center
-				else if(elementCollider.contains(this.getParent().getCenterLocation().getX(), this.getParent().getCenterLocation().getY())) {
+				if(this.isOverlapping(element)) {
 					return element;
 				}
 			}
@@ -156,6 +126,117 @@ public class BoxCollider extends Collider {
 
 	public void setDebugMode(boolean debugMode) {
 		this.debugMode = debugMode;
+	}
+
+	@Override
+	public void onAttach(GameElement element) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public boolean isCollision(Vector<GameElement> elements) {
+		for(GameElement element : elements) {
+			Collider elementCollider = (Collider) element.getBehavior2(Collider.class.getSimpleName());
+			if(elementCollider != null) {
+				if(this.isOverlapping(element)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+
+	@Override
+	public GameElement getCollision(Vector<GameElement> elements) {
+		// TODO Auto-generated method stub
+		for(GameElement element : elements) {
+			Collider elementCollider = (Collider) element.getBehavior2(Collider.class.getSimpleName());
+			if(elementCollider != null) {
+				if(this.isOverlapping(element)) {
+					return element;
+				}
+			}
+		}
+		return null;
+	}
+	
+	public boolean isOverlapping(GameElement e) {
+		Rectangle rect = new Rectangle(this.getParent().getLocation().getX(), this.getParent().getLocation().getY(), this.getParent().getSize().getX(), this.getParent().getSize().getY());   
+		return rect.intersects(e.getLocation().getX(), e.getLocation().getY(), e.getSize().getX(), e.getSize().getY());
+	}
+
+	@Override
+	public boolean isCollision(Vector2 ref) {
+		// TODO Auto-generated method stub
+		return this.isCollision(ref.getX(), ref.getY());
+	}
+
+
+	@Override
+	public boolean isCollision(Vector2[] ref) {
+		// TODO Auto-generated method stub
+		for(var vec : ref) {
+			if(this.isCollision(vec)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+
+	@Override
+	public GameElement getCollision(Vector2[] ref) {
+		// TODO Auto-generated method stub
+		for(var vec : ref) {
+			GameElement e = this.getCollision(vec.getX(), vec.getY());
+			if(e != null) {
+				return e;
+			}
+		}
+		return null;
+	}
+
+
+	@Override
+	public Vector<Vector2> filterCoords(Vector2[] ref) {
+		// TODO Auto-generated method stub
+		Vector<Vector2> freeCords = new Vector<>();
+		for(var vec : ref) {
+			if(!this.isCollision(vec.getX(), vec.getY())) {
+				freeCords.add(vec);
+			}
+		}
+		return freeCords;
+	}
+
+
+	@Override
+	public boolean isCollision(Rect rect) {
+		// TODO Auto-generated method stub
+		for(GameElement element : this.getElements()) {
+			Collider elementCollider = (Collider) element.getBehavior2(Collider.class.getSimpleName());
+			if(elementCollider != null) {
+				if(elementCollider.contains(rect.getX(), rect.getY())) {
+					return true;
+				}
+				else if(elementCollider.contains(rect.getX() + rect.getWidth(), rect.getY())) {
+					return true;
+				}
+				else if(elementCollider.contains(rect.getX() + rect.getWidth(), rect.getY() + rect.getHeight())) {
+					return true;
+				}
+				else if(elementCollider.contains(rect.getX(), rect.getY() + rect.getHeight())) {
+					return true;
+				}
+				else if(elementCollider.contains(rect.getX() + (rect.getWidth() / 2), rect.getY() + (rect.getHeight() / 2))) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
 }

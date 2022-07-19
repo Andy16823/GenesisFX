@@ -9,11 +9,13 @@ import java.util.Vector;
 
 import gfx.graphics.Camera;
 import gfx.math.Vector2;
+import gfx.ui.gfxControl;
 
 public class gfxScene extends javafx.scene.Scene{
 	private String name;
     private String tag;
     private Vector<Layer> layer;
+    private Vector<gfxControl> uiElements;
     private Camera camera;
     private Vector2 transform;
     private Image backgroundPlane;
@@ -25,6 +27,7 @@ public class gfxScene extends javafx.scene.Scene{
 		super(parent);
 		this.name = name;
 		this.layer = new Vector<>();
+		this.uiElements = new Vector<>();
 		this.transform = new Vector2(0,0);
 		this.input = new Input();
 		this.resetInput();
@@ -37,6 +40,7 @@ public class gfxScene extends javafx.scene.Scene{
 		super(new Group());
 		this.name = name;
 		this.layer = new Vector<>();
+		this.uiElements = new Vector<>();
 		this.transform = new Vector2(0,0);
 		this.input = new Input();
 		this.resetInput();
@@ -74,11 +78,13 @@ public class gfxScene extends javafx.scene.Scene{
     }
 
     public void updateScene(Game game, RenderTarget renderTarget) {
-        for(Layer layer1 : this.layer) {
-            if(layer1.isEnabled()) {
-                layer1.updateLayer(game, renderTarget);
+    	if(!game.isPause()) {
+            for(Layer layer1 : this.layer) {
+                if(layer1.isEnabled()) {
+                    layer1.updateLayer(game, renderTarget);
+                }
             }
-        }
+    	}
     }
 
     public String getName() {
@@ -249,6 +255,25 @@ public class gfxScene extends javafx.scene.Scene{
 			}
 		}
 		return false;
+	}
+	
+	public void addUIElement(gfxControl element) {
+		this.uiElements.add(element);
+		this.getUI().getChildren().add(element);
+	}
+	
+	public gfxControl getUIElement(String name) {
+		for(var element : this.uiElements) {
+			if(element.getName().equals(name)) {
+				return element;
+			}
+		}
+		return null;
+	}
+	
+	public void removeElement(gfxControl element) {
+		this.getUI().getChildren().remove(element);
+		this.uiElements.remove(element);
 	}
 		
 }

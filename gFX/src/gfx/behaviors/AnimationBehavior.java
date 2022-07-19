@@ -5,6 +5,7 @@ import java.util.Vector;
 
 import gfx.Game;
 import gfx.GameBehavior;
+import gfx.GameElement;
 import gfx.RenderTarget;
 import gfx.elements.Sprite;
 import gfx.graphics.Animation;
@@ -32,7 +33,7 @@ public class AnimationBehavior extends GameBehavior {
 	}
 
 	@Override
-	public void onUpdate(RenderTarget renderTarget) {
+	public void onUpdate(Game game) {
 		// TODO Auto-generated method stub
 
 	}
@@ -47,6 +48,12 @@ public class AnimationBehavior extends GameBehavior {
 	public void afterRender(GraphicsContext g) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	@Override
+	public void onAttach(GameElement element) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	public void addAnimation(Animation animation) {

@@ -2,6 +2,7 @@ package gfx.behaviors;
 
 import gfx.Game;
 import gfx.GameBehavior;
+import gfx.GameElement;
 import gfx.RenderTarget;
 import gfx.math.Vector2;
 import javafx.scene.canvas.GraphicsContext;
@@ -84,7 +85,7 @@ public class DirectMovementController extends GameBehavior {
 	}
 
 	@Override
-	public void onUpdate(RenderTarget renderTarget) {
+	public void onUpdate(Game game) {
 		// TODO Auto-generated method stub
 
 	}
@@ -103,6 +104,12 @@ public class DirectMovementController extends GameBehavior {
             	g.strokeOval(this.destination.getX() - 20, this.destination.getY() - 20, 40, 40);
             }
         }
+	}
+
+	@Override
+	public void onAttach(GameElement element) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

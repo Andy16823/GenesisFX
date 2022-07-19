@@ -62,5 +62,31 @@ public class Vector2 {
         float deg = (float) Math.toDegrees(radians);
         return deg;
     }
+    
+    public static Vector2 towards(float deg, float dist, Vector2 start) {
+    	Vector2 vec = start.duplicate();
+    	float rAngle = (float) Math.toRadians(deg);
+    	float x = (float) (dist * Math.cos(rAngle));
+        float y = (float) (dist * Math.sin(rAngle));
+        
+        vec.add(x, y);       
+        return vec;
+    }
+    
+    public Vector2 north(double dist) {
+    	return new Vector2(x, y - dist);
+    }
+    
+    public Vector2 south(double dist) {
+    	return new Vector2(x, y + dist);
+    }
+    
+    public Vector2 east(double dist) {
+    	return new Vector2(x + dist, y);
+    }
+    
+    public Vector2 west(double dist) {
+    	return new Vector2(x - dist, y);
+    }
 
 }
