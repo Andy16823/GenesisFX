@@ -2,6 +2,7 @@ package gfx.ui;
 
 import java.util.Vector;
 
+import gfx.Game;
 import gfx.math.Vector2;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -82,6 +83,12 @@ public class gfxToolbar extends gfxControl{
 
 	public void setLayout(HBox layout) {
 		this.layout = layout;
+	}
+
+	@Override
+	public void onUpdate(Game game) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

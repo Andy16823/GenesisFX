@@ -2,6 +2,7 @@ package gfx.ui;
 
 import java.awt.Color;
 
+import gfx.Game;
 import gfx.math.Vector2;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -53,6 +54,13 @@ public class gfxLabel extends gfxControl{
 	
 	public String getText() {
 		return this.label.getText();
+	}
+
+
+	@Override
+	public void onUpdate(Game game) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

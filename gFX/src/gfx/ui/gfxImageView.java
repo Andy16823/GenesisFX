@@ -2,6 +2,7 @@ package gfx.ui;
 
 import java.awt.Color;
 
+import gfx.Game;
 import gfx.math.Vector2;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -82,6 +83,13 @@ public class gfxImageView extends gfxControl{
 	
 	public void setImage(Image image) {
 		this.imageView.setImage(image);
+	}
+
+
+	@Override
+	public void onUpdate(Game game) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

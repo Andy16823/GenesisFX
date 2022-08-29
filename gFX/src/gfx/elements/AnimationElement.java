@@ -38,7 +38,7 @@ public class AnimationElement extends Sprite {
 	}
 		
 	@Override
-	public void render(GraphicsContext g) {
+	public void render(Game game, GraphicsContext g) {
 		// TODO Auto-generated method stub
 		for(GameBehavior behavior : this.getBehaviors()) {
 			behavior.beforeRender(g);

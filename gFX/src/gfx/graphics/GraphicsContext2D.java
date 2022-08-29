@@ -1,5 +1,6 @@
 package gfx.graphics;
 
+import gfx.Game;
 import javafx.scene.canvas.GraphicsContext;
 
 public class GraphicsContext2D extends gfx.RenderTarget {
@@ -10,10 +11,10 @@ public class GraphicsContext2D extends gfx.RenderTarget {
 	}
 
 	@Override
-	public void render(gfx.gfxScene scene) {
+	public void render(Game game, gfx.gfxScene scene) {
         GraphicsContext context = this.getGraphicsContext2D();
         context.clearRect(0, 0, this.getWidth(), this.getHeight());
-        scene.renderScene(context);		
+        scene.renderScene(game, context);		
 	}
 
 	@Override

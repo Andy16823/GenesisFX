@@ -48,6 +48,7 @@ public abstract class Collider extends GameBehavior {
 	public abstract boolean isCollision(Vector2[] ref);
 	public abstract boolean isCollision(Vector2 ref);
 	public abstract boolean isCollision(Vector<GameElement> elements);
+	public abstract boolean isCollision(GameElement element);
 	public abstract boolean isCollision(Rect rect);
 	public abstract GameElement getCollision();
 	public abstract GameElement getCollision(double x, double y);

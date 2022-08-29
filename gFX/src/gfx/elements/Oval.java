@@ -29,7 +29,7 @@ public class Oval extends GameElement {
 	}
 		
 	@Override
-	public void render(GraphicsContext g) {
+	public void render(Game game, GraphicsContext g) {
 		// TODO Auto-generated method stub
 		
 		if(this.fill != null) {

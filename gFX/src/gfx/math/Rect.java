@@ -64,6 +64,15 @@ public class Rect {
 		return false;
 	}
 	
+	public boolean intersects(Rect ref) {
+		if(this.getX() > (ref.getWidth() + ref.getX()) || this.getY() + this.getHeight() < ref.getY() || ref.getX() > this.getWidth() + this.getX()	|| ref.getY() + ref.getHeight() < this.getY())
+		{
+			return false;
+		}
+		
+		return true;
+	}
+	
 	public void addX(double value) {
 		this.x += value;
 	}

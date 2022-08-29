@@ -238,5 +238,18 @@ public class BoxCollider extends Collider {
 		}
 		return false;
 	}
+
+
+	@Override
+	public boolean isCollision(GameElement element) {
+		// TODO Auto-generated method stub
+		Collider elementCollider = (Collider) element.getBehavior2(Collider.class.getSimpleName());
+		if(elementCollider != null) {
+			if(this.isOverlapping(element)) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 }

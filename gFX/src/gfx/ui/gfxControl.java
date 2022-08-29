@@ -1,5 +1,6 @@
 package gfx.ui;
 
+import gfx.Game;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
@@ -43,5 +44,6 @@ public abstract class gfxControl extends Group{
 	}
 
 	public abstract Pane getLayout();
+	public abstract void onUpdate(Game game);
 		
 }

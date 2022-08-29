@@ -25,10 +25,10 @@ public class Layer {
     	}
     }
 
-    public void renderLayer(GraphicsContext g) {
+    public void renderLayer(Game game, GraphicsContext g) {
        for(GameElement element : this.gameElements) {
            if(element.isEnabled()) {
-               element.render(g);
+               element.render(game, g);
            }
        }
     }

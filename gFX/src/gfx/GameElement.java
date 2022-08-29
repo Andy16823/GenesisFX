@@ -14,7 +14,7 @@ public abstract class GameElement {
     private Vector<GameBehavior> behaviors;
     private double rotation;
 
-    public abstract void render(GraphicsContext g);
+    public abstract void render(Game game, GraphicsContext g);
     public abstract void update(Game game, RenderTarget target);
     
     public GameElement() {

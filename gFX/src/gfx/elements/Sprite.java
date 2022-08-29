@@ -3,6 +3,7 @@ package gfx.elements;
 import gfx.Game;
 import gfx.GameBehavior;
 import gfx.RenderTarget;
+import gfx.math.Rect;
 import gfx.math.Vector2;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -26,7 +27,7 @@ public class Sprite extends gfx.GameElement {
 	}	
 	
 	@Override
-	public void render(GraphicsContext g) {
+	public void render(Game game, GraphicsContext g) {
 		// TODO Auto-generated method stub
 		for(GameBehavior behavior : this.getBehaviors()) {
 			behavior.beforeRender(g);
@@ -77,6 +78,10 @@ public class Sprite extends gfx.GameElement {
 	
 	public double getSpriteResoulution() {
 		return this.getSize().getY() / this.getSize().getX();
+	}
+	
+	public Rect getBounds() {
+		return new Rect(this.getLocation().getX(), this.getLocation().getY(), this.getSize().getX(), this.getSize().getY());
 	}
 	
 }

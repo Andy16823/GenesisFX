@@ -37,7 +37,7 @@ public class Grid extends GameElement {
 	}
 
 	@Override
-	public void render(GraphicsContext g) {
+	public void render(Game game, GraphicsContext g) {
 		// TODO Auto-generated method stub
 		if(this.renderGrid) {
 			for(var rect : this.matrix) {

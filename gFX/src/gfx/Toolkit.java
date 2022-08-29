@@ -2,6 +2,9 @@ package gfx;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Vector;
+
+import gfx.math.Vector2;
 
 public class Toolkit {
 	
@@ -15,6 +18,17 @@ public class Toolkit {
 			return true;
 		}
 		return false;
+	}
+	
+	public static Vector<GameElement> getNearbyElements(Vector<GameElement> elementsToCheck, Vector2 location, double distance) {
+		Vector<GameElement> nearbyElements = new Vector<>();
+		for(GameElement element : elementsToCheck) {
+			if(Vector2.getDistance(location, element.getCenterLocation()) <= distance) 
+			{
+				nearbyElements.add(element);
+			}
+		}
+		return nearbyElements;
 	}
 	
 }

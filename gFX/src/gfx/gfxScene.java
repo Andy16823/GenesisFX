@@ -59,12 +59,16 @@ public class gfxScene extends javafx.scene.Scene{
         this.layer.add(layer);
     }
     
+    public void addLayer(String name) {
+    	this.layer.add(new Layer(name));
+    }
+    
     public void recalculate() {
     	this.parent.getChildren().remove(uiNode);
     	this.parent.getChildren().add(uiNode);
     }
 
-    public void renderScene(GraphicsContext g) {
+    public void renderScene(Game game, GraphicsContext g) {
     	g.getCanvas().setHeight(this.getHeight());
     	g.getCanvas().setWidth(this.getWidth());
     	if(this.backgroundPlane != null) {
@@ -72,7 +76,7 @@ public class gfxScene extends javafx.scene.Scene{
     	}
         for(Layer layer1 : this.layer) {
             if(layer1.isEnabled()) {
-                layer1.renderLayer(g);
+                layer1.renderLayer(game, g);
             }
         }
     }
@@ -83,6 +87,9 @@ public class gfxScene extends javafx.scene.Scene{
                 if(layer1.isEnabled()) {
                     layer1.updateLayer(game, renderTarget);
                 }
+            }
+            for(gfxControl control : this.uiElements) {
+            	control.onUpdate(game);
             }
     	}
     }

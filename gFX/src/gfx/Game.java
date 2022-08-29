@@ -67,7 +67,7 @@ public class Game {
 		if(callbacks != null) {
 			this.callbacks.beforeRender(this);
 		}
-		this.renderTarget.render(selectedScene);
+		this.renderTarget.render(this, selectedScene);
 		if(callbacks != null) {
 			this.callbacks.afterRender(this);
 		}
@@ -152,6 +152,10 @@ public class Game {
 
 	public void setPause(boolean pause) {
 		this.pause = pause;
+	}
+	
+	public Stage getStage() {
+		return this.stage;
 	}
 		
 }

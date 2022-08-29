@@ -74,6 +74,10 @@ public class DirectMovementController extends GameBehavior {
         }
     }
     
+    public Vector2 getDestination() {
+    	return destination;
+    }
+    
     public void clearDestination() {
     	this.destination = null;
     }

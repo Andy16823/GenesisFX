@@ -12,6 +12,6 @@ public abstract class RenderTarget extends Canvas {
     	super(width, height);
     }
     
-    public abstract void render(gfx.gfxScene scene);
+    public abstract void render(Game game, gfx.gfxScene scene);
     public abstract void update();
 }

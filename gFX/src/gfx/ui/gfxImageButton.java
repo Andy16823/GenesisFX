@@ -1,5 +1,6 @@
 package gfx.ui;
 
+import gfx.Game;
 import gfx.math.Vector2;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -62,6 +63,12 @@ public class gfxImageButton extends gfxControl{
 
 	public void setHoverImage(Image hoverImage) {
 		this.hoverImage = hoverImage;
+	}
+
+	@Override
+	public void onUpdate(Game game) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
