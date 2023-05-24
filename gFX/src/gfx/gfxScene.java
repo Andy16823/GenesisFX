@@ -12,6 +12,7 @@ import gfx.math.Vector2;
 import gfx.ui.gfxControl;
 
 public class gfxScene extends javafx.scene.Scene{
+	private Game game;
 	private String name;
     private String tag;
     private Vector<Layer> layer;
@@ -267,6 +268,8 @@ public class gfxScene extends javafx.scene.Scene{
 	public void addUIElement(gfxControl element) {
 		this.uiElements.add(element);
 		this.getUI().getChildren().add(element);
+		element.setGame(game);
+		element.setScene(this);
 	}
 	
 	public gfxControl getUIElement(String name) {
@@ -281,6 +284,14 @@ public class gfxScene extends javafx.scene.Scene{
 	public void removeElement(gfxControl element) {
 		this.getUI().getChildren().remove(element);
 		this.uiElements.remove(element);
+	}
+
+	public Game getGame() {
+		return game;
+	}
+
+	public void setGame(Game game) {
+		this.game = game;
 	}
 		
 }

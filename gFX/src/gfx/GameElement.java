@@ -113,4 +113,9 @@ public abstract class GameElement {
 	public void setRotation(double rotation) {
 		this.rotation = rotation;
 	}
+	
+	public void transformElement(double x, double y) {
+		this.getLocation().addX(x);
+		this.getLocation().addY(y);
+	}
 }

@@ -5,6 +5,7 @@ import java.util.Vector;
 import javafx.scene.Group;
 import javafx.stage.Stage;
 
+
 public class Game {
 	private Stage stage;
 	private Vector<gfxScene> scenes;
@@ -17,6 +18,8 @@ public class Game {
 	private RessourceManager assets;
 	private Storage storage;
 	private boolean pause;
+	
+	private AfterUpdateHook afterUpdateHook;
 	
 	public Game(RenderTarget renderTarget, int maxFps, GameCallbacks callbacks) {
 		this.scenes = new Vector<>();
@@ -60,6 +63,11 @@ public class Game {
 			this.callbacks.onUpdate(this);
 		}
 		this.selectedScene.updateScene(this, renderTarget);
+		
+		if(afterUpdateHook != null) {
+			afterUpdateHook.afterUpdate(this);
+		}
+		
 		this.storage.clearElements();
 	}
 	
@@ -122,6 +130,7 @@ public class Game {
 	}
 	public void addScene(gfxScene scene) {
 		this.scenes.add(scene);
+		scene.setGame(this);
 	}
 	public void end() {
 		if(callbacks != null) {
@@ -157,5 +166,13 @@ public class Game {
 	public Stage getStage() {
 		return this.stage;
 	}
-		
+	
+	public void hookAfterUpdate(AfterUpdateHook hook) {
+		this.afterUpdateHook = hook;
+	}
+	
+	public void clearAfterUpdateHook() {
+		this.afterUpdateHook = null;
+	}
 }
+

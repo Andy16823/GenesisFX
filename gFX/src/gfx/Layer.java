@@ -2,6 +2,7 @@ package gfx;
 
 import javafx.scene.canvas.GraphicsContext;
 
+import java.util.Random;
 import java.util.Vector;
 
 import gfx.math.Vector2;
@@ -43,8 +44,9 @@ public class Layer {
     
     public void transformLayer(double x, double y) {
         for(GameElement e : this.gameElements) {
-        	e.getLocation().addX(x);
-            e.getLocation().addY(y);
+        	e.transformElement(x,y);
+//        	e.getLocation().addX(x);
+//          e.getLocation().addY(y);
         }
     }
 
@@ -99,6 +101,14 @@ public class Layer {
     		if(e.getName().equals(name)) {
     			return e;
     		}
+    	}
+    	return null;
+    }
+    
+    public GameElement getRandomElement() {
+    	Random rnd = new Random();
+    	if(!gameElements.isEmpty()) {
+    		return this.gameElements.get(rnd.nextInt(gameElements.size()));
     	}
     	return null;
     }

@@ -50,6 +50,35 @@ public class Rect {
 		this.height = height;
 	}
 	
+	public Vector2 getTopLeft() {
+		return new Vector2(x,y);
+	}
+	
+	public Vector2 getTopRight() {
+		return new Vector2(x + width,y);
+	}
+	
+	public Vector2 getBottomRight() {
+		return new Vector2(x + width,y + height);
+	}
+	
+	public Vector2 getBottomLeft() {
+		return new Vector2(x,y + height);
+	}
+	
+	public boolean contains(Vector2 ref) {
+		return this.contains(ref.getX(), ref.getY());
+	}
+	
+	public boolean contains(Vector2[] ref) {
+		for(var vec2 : ref) {
+			if(this.contains(vec2)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public boolean contains(double x, double y) {
 		if(x > this.x && x < this.x + this.width && y > this.y && y < this.y + this.height) {
 			return true;

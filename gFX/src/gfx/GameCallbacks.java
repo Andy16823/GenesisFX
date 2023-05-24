@@ -1,5 +1,7 @@
 package gfx;
 
+import javafx.scene.canvas.GraphicsContext;
+
 public interface GameCallbacks {
 	public void beforeStart(Game game);
 	public void onUpdate(Game game);

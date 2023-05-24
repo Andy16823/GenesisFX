@@ -88,5 +88,34 @@ public class Vector2 {
     public Vector2 west(double dist) {
     	return new Vector2(x - dist, y);
     }
+    
+    public Vector2 northWest(double dist) {
+    	return new Vector2(x - dist, y - dist);
+    }
 
+    public Vector2 northEast(double dist) {
+    	return new Vector2(x + dist, y - dist);
+    }
+    
+    public Vector2 southWest(double dist) {
+    	return new Vector2(x - dist, y + dist);
+    }
+    
+    public Vector2 southEast(double dist) {
+    	return new Vector2(x + dist, y + dist);
+    }
+    
+    public Vector2[] allDirections(double dist) {
+    	Vector2[] out = new Vector2[] {
+    			this.north(dist), 
+    			this.south(dist), 
+    			this.east(dist), 
+    			this.west(dist), 
+    			this.northWest(dist), 
+    			this.northEast(dist), 
+    			this.southWest(dist), 
+    			this.southEast(dist)
+    	};
+    	return out;
+    }
 }

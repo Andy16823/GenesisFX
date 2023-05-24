@@ -119,5 +119,9 @@ public class Timer extends AnimationTimer {
 	public void setDeltaTime(long deltaTime) {
 		this.deltaTime = deltaTime;
 	}
+	
+	public float getCalculatedFPS() {
+		return 1000 / this.getDeltaTime();
+	}
 
 }

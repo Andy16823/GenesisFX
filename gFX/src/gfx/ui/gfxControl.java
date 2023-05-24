@@ -1,6 +1,7 @@
 package gfx.ui;
 
 import gfx.Game;
+import gfx.gfxScene;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
@@ -9,9 +10,27 @@ public abstract class gfxControl extends Group{
 	private String name;
 	private Pane layout;
 	private long lastToggle;
+	private Game game;
+	private gfxScene scene;
 	
 	public gfxControl(String name) {
 		this.name = name;
+	}
+	
+	public void setGame(Game game) {
+		this.game = game;
+	}
+	
+	public void setScene(gfxScene scene) {
+		this.scene = scene;
+	}
+	
+	public Game getGame() {
+		return this.game;
+	}
+	
+	public gfxScene getGfxScene() {
+		return this.scene;
 	}
 		
 	public void addControl(Node node) {
